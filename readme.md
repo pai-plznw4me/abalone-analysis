@@ -42,12 +42,12 @@ pip install -r requirements.txt
 
 - 전처리 단계 
 
-  |      | 파일 이름                                                    | 산출물                        |
-  | ---- | ------------------------------------------------------------ | ----------------------------- |
-  | 1    | [1.전복 정보 데이터프레임화.ipynb](./src/1.전복 정보 데이터프레임화.ipynb) | ./datasets/anno.df            |
-  | 2    | [2.DataFrame(index)_meta(index)번호매칭.ipynb](./src/2.DataFrame(index)_meta(index)번호매칭.ipynb) |                               |
-  | 3    | [3.모든 폴리곤 추출(완도).ipynb](./src/3.모든 폴리곤 추출(완도).ipynb) | ./datasets/wando_add_meta.csv |
-  | 4    | [4.모든 폴리곤 추출(진도).ipynb](./src/4.모든 폴리곤 추출(진도).ipynb) | ./datasets/jindo_add_meta.csv |
+  |      | 파일 이름                                          | 산출물                        |
+  | ---- |------------------------------------------------| ----------------------------- |
+  | 1    | 1.전복 정보 데이터프레임화.ipynb           | ./datasets/anno.df            |
+  | 2    | 2.DataFrame(index)_meta(index)번호매칭.ipynb |                               |
+  | 3    | 3.모든 폴리곤 추출(완도).ipynb            | ./datasets/wando_add_meta.csv |
+  | 4    | 4.모든 폴리곤 추출(진도).ipynb            | ./datasets/jindo_add_meta.csv |
 
 ## 분석
 
