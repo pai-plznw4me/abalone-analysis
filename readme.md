@@ -42,17 +42,18 @@ pip install -r requirements.txt
 
 - 전처리 단계 
 
-  - [1.전복 정보 데이터프레임화.ipynb](src/1.전복 정보 데이터프레임화.ipynb) > './datasets/anno.df'
+  - [1.전복 정보 데이터프레임화.ipynb](./src/1.전복 정보 데이터프레임화.ipynb) > './datasets/anno.df'
 
-  - [2.DataFrame(index)_meta(index)번호매칭.ipynb](src/2.DataFrame(index)_meta(index)번호매칭.ipynb)  
+  - [2.DataFrame(index)_meta(index)번호매칭.ipynb](./src/2.DataFrame(index)_meta(index)번호매칭.ipynb)  
 
-  - [3.모든 폴리곤 추출(완도).ipynb](src/3.모든 폴리곤 추출(완도).ipynb) > './datasets/wando_add_meta.csv'
+  - [3.모든 폴리곤 추출(완도).ipynb](./src/3.모든 폴리곤 추출(완도).ipynb) > './datasets/wando_add_meta.csv'
 
-  - [4.모든 폴리곤 추출(진도).ipynb](src/4.모든 폴리곤 추출(진도).ipynb)  > './datasets/jindo_add_meta.csv'
+  - [4.모든 폴리곤 추출(진도).ipynb](./src/4.모든 폴리곤 추출(진도).ipynb)  > './datasets/jindo_add_meta.csv'
 
 ## 분석
 
 > 데이터 전처리 단계를 통해 생성된 DataFrame 을 분석합니다.
+> 해당 스크립트를 수행하기 위해서는 `./datasets/wando_add_meta.csv`, `./datasets/jindo_add_meta.csv` 가 존재해야 합니다
 
 - 분석 단계
   - [5. 데이터분석.ipynb](src/5. 데이터분석.ipynb) 
