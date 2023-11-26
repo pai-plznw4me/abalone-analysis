@@ -342,6 +342,7 @@ def plot_images(imgs, names=None, random_order=False, savepath=None, show=True, 
         if not names is None:
             ax.set_title(str(names[ind]), c='red', size=fontsize)
     if not savepath is None:
+        os.makedirs(os.path.dirname(savepath), exist_ok=True)
         plt.savefig(savepath)
     if show:
         plt.tight_layout()
