@@ -54,6 +54,8 @@ pip install -r requirements.txt
 > 데이터 전처리 단계를 통해 생성된 DataFrame 을 분석합니다.
 > 해당 스크립트를 수행하기 위해서는 `./datasets/wando_add_meta.csv`, `./datasets/jindo_add_meta.csv` 가 존재해야 합니다
 
+- 분석 단계
+
 |      | 파일 이름           | 산출물 |
 | ---- | ------------------- | ------ |
 | 1    | 5. 데이터분석.ipynb |        |
