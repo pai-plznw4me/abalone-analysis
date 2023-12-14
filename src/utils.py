@@ -1095,3 +1095,107 @@ def clahe(image):
     clahe_img = clahe.apply(gray_img)
 
     return clahe_img
+
+
+def add_zero_padding(image, pad_h, pad_w):
+    # 추출된 이미지 양 끝에 주변에 zero padding 을 붙입니다.
+    pad_h, pad_w = (np.array(image.shape) / 4).astype(int)[:2]
+    if image.ndim == 3:
+        pad_width = [(pad_h, pad_w), (pad_h, pad_w), (0, 0)]
+    elif image.ndim == 2:
+        pad_width = [(pad_h, pad_w), (pad_h, pad_w)]
+    else:
+        print('지원하지 않는 이미지 입니다. 3차원 또는 2차원 이미지만 지원합니다.')
+        raise NotImplementedError
+    padded_image = np.pad(image, pad_width)
+    return padded_image
+
+
+def draw_polygons(img, coords, **kwargs):
+    """
+    이미지에 다각형을 그리는 함수
+
+    Parameters:
+    - img: numpy.ndarray
+        그림을 그릴 대상 이미지 배열
+    - coords: list of int
+        다각형 좌표를 담은 리스트. 각 좌표는 (x, y) 형태로 번갈아가며 포함되어야 함.
+    - **kwargs: 키워드 인자
+        OpenCV의 cv2.polylines 함수에 전달할 추가적인 인자들
+
+    Returns:
+    - polylined_img: numpy.ndarray
+        다각형이 그려진 이미지 배열
+
+    Example:
+    ```python
+    import cv2
+
+    # 이미지 생성
+    img = np.zeros((500, 500, 3), dtype=np.uint8)
+
+    # 다각형 좌표
+    polygon_coords = [100, 100, 200, 50, 300, 100, 250, 200, 150, 200]
+
+    # 다각형 그리기
+    result_img = draw_polygons(img, polygon_coords, color=(0, 255, 0), thickness=5)
+
+    # 결과 이미지 출력
+    cv2.imshow('Polygon Image', result_img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    ```
+
+    Notes:
+    - 이 함수는 입력 이미지에 지정된 좌표를 사용하여 다각형을 그리고 반환합니다.
+    - OpenCV의 cv2.polylines 함수를 내부적으로 호출하며, 그에 대한 추가 인자는 **kwargs를 통해 전달됩니다.
+    """
+    # 단일 polygon을 이미지에 그립니다.
+    resized_coords = (np.array(coords).reshape(-1, 2)).astype(int)
+    polylined_img = cv2.polylines(img, [resized_coords], isClosed=True, **kwargs)
+    return polylined_img
+
+
+def draw_ordered_coordinates(sample_img, coords, **kwargs):
+    """
+    이미지에 주어진 좌표를 순서대로 표기함
+    """
+    for ind, coord in enumerate(coords):
+        coord = np.array(coord).astype(int)
+        sample_img = cv2.putText(sample_img, str(ind), coord, **kwargs)
+    return sample_img
+
+
+def calculate_rectangle_lengths(rectangle):
+    """
+    회전된 직사각형의 두 변의 길이를 계산하는 함수
+
+    Parameters:
+    - rectangle: list of tuples
+        회전된 직사각형의 네 꼭짓점 좌표를 담은 리스트. 각 좌표는 (x, y) 형태로 표현됨.
+
+    Returns:
+    - side_lengths: tuple
+        두 변의 길이를 나타내는 튜플 (long, short), 여기서 long은 더 긴 변의 길이, short는 더 짧은 변의 길이
+
+    Raises:
+    - AssertionError: 입력된 좌표가 직사각형을 형성하지 않는 경우 에러를 발생시킴
+    """
+    # 각 꼭짓점을 연결하는 선분의 길이를 계산
+    side1 = int(np.linalg.norm(np.array(rectangle[1]) - np.array(rectangle[0])))
+    side2 = int(np.linalg.norm(np.array(rectangle[2]) - np.array(rectangle[1])))
+    side3 = int(np.linalg.norm(np.array(rectangle[3]) - np.array(rectangle[2])))
+    side4 = int(np.linalg.norm(np.array(rectangle[0]) - np.array(rectangle[3])))
+
+    # 직사각형은 4면 중 2변은 같은 길이를 가져야 합니다.
+    assert (side1 == side3) and (side2 == side4), "입력된 좌표가 직사각형을 형성하지 않습니다. {},{},{},{}".format(side1,
+                                                                                                side2,
+                                                                                                side3,
+                                                                                                side4)
+
+    # 더 긴 변과 더 짧은 변을 계산
+    long = np.maximum(side1, side2)
+    short = np.minimum(side1, side2)
+
+    side_lengths = (long, short)
+    return side_lengths
