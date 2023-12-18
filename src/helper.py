@@ -229,7 +229,6 @@ def compare_jindo_wando(wando_images, wando_meta_info, jindo_images, jindo_meta_
     plt.bar(np.array(x_coord) + width, height=j_long_info, color=JINDO_COLOR, label='Jindo/long', alpha=0.5,
             width=width)
     plt.xticks(np.array(x_coord) + width / 2, target_name)
-    plt.title('Compare Wando with Jindo, long axis')
     plt.legend()
     plt.show()
 
@@ -238,7 +237,6 @@ def compare_jindo_wando(wando_images, wando_meta_info, jindo_images, jindo_meta_
     plt.bar(np.array(x_coord) + width, height=j_short_info, color=JINDO_COLOR, label='Jindo/short', alpha=0.5,
             width=width)
     plt.xticks(np.array(x_coord) + width / 2, target_name)
-    plt.title('Compare Wando with Jindo, short axis')
     plt.legend()
     plt.show()
 
@@ -303,7 +301,7 @@ def compare_small_big(big_images, big_meta_info, small_images, small_meta_info):
     b_longs, b_shorts, b_ratios, b_describe = basic_analysis(small_meta_info)
 
     # long, short 시각화
-    plt.scatter(s_longs, s_shorts, c=big_COLOR, alpha=0.5, label='big')
+    plt.scatter(s_longs, s_shorts, c=big_COLOR, alpha=0.5, label='large')
     for idx, (long, short) in enumerate(zip(s_longs, s_shorts)):
         plt.annotate(big_meta_info[idx][0], (long, short))
 
@@ -313,7 +311,7 @@ def compare_small_big(big_images, big_meta_info, small_images, small_meta_info):
     plt.legend()
     plt.show()
     # ratio 출력
-    print('BIG L/S 비율 : {} \nSMALL L/S 비율 : {}'.format(np.mean(s_ratios), np.mean(b_ratios)))
+    print('LARGE L/S 비율 : {} \nSMALL L/S 비율 : {}'.format(np.mean(s_ratios), np.mean(b_ratios)))
 
     # big , small describe 비교 시각화
     target_index = [1, 3, 7]
@@ -328,20 +326,18 @@ def compare_small_big(big_images, big_meta_info, small_images, small_meta_info):
 
     # 장축 비교 시각화
     width = 0.4
-    plt.bar(x_coord, height=w_long_info.values, color=big_COLOR, label='big/long', alpha=0.5, width=width)
-    plt.bar(np.array(x_coord) + width, height=j_long_info, color=small_COLOR, label='small/long', alpha=0.5,
+    plt.bar(x_coord, height=w_long_info.values, color=big_COLOR, label='large/shell length', alpha=0.5, width=width)
+    plt.bar(np.array(x_coord) + width, height=j_long_info, color=small_COLOR, label='small/shell length', alpha=0.5,
             width=width)
     plt.xticks(np.array(x_coord) + width / 2, target_name)
-    plt.title('Compare big with small, long axis')
     plt.legend()
     plt.show()
 
     # 단축 비교 시각화
-    plt.bar(x_coord, height=w_short_info.values, color=big_COLOR, label='big/short', alpha=0.5, width=width)
-    plt.bar(np.array(x_coord) + width, height=j_short_info, color=small_COLOR, label='small/short', alpha=0.5,
+    plt.bar(x_coord, height=w_short_info.values, color=big_COLOR, label='large/shell height', alpha=0.5, width=width)
+    plt.bar(np.array(x_coord) + width, height=j_short_info, color=small_COLOR, label='large/shell height', alpha=0.5,
             width=width)
     plt.xticks(np.array(x_coord) + width / 2, target_name)
-    plt.title('Compare big with small, short axis')
     plt.legend()
     plt.show()
 
